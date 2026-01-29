@@ -20,30 +20,37 @@ int comparator(const void *a, const void *b) {
     return strcmp(A -> name ,B -> name);
 }
 
-void bin_search(first* arr, int len, second searching_el) {
-    int l = 0;
-    int r = len - 1;
-    while (l < r) {
-        int m = (l + r) / 2;
-        if ( strcmp(searching_el.name, arr[m].name) > 0 ) {
-            l = m + 1;
+void merge(first* f, second* s, int n, int m) {
+    int u1 = 0;
+    int u2 = 0;
+
+    while ((u1 < n) && (u2 < m)) {
+        if (strcmp(f[u1].name, s[u2].name) < 0) {
+            u1++;
         }
-        else  {
-            r = m;
+        else if (strcmp(f[u1].name, s[u2].name) > 0) {
+            u2++;
         }
-    }
-    if (strcmp(searching_el.name, arr[l].name) == 0) {
-        printf("%s %d %s %s %s\n", arr[l].name, arr[l].birth,  arr[l].country,  searching_el.name, searching_el.movie);
-        for (int i = l + 1; i < len; i++) {
-            if (strcmp(searching_el.name, arr[i].name) == 0) {
-                printf("%s %d %s %s %s\n", arr[i].name, arr[i].birth,  arr[i].country,  searching_el.name, searching_el.movie);
+        else {
+            int st1 = u1;
+            int st2 = u2;
+            while (u1 < n && strcmp(f[u1].name, f[st1].name) == 0) {
+                u1++;
             }
-            else {
-                return;
+            while (u2 < m && strcmp(s[u2].name, s[st2].name) == 0) {
+                u2++;
+            }
+
+            for (int i = st1; i < u1; i++) {
+                    for (int j = st2; j < u2; j++) {
+                        printf("%s %d %s %s %s\n", f[i].name, f[i].birth, f[i].country, s[j].name, s[j].movie);
+                    }
+                }
             }
         }
+
     }
-}
+
 
 int main() {
     int n;
@@ -75,8 +82,11 @@ int main() {
         fscanf(stdin, " \"%30[^\"]\" \"%20[^\"]\"",  temp_name, temp_movie);
         sprintf(second_table[i].name, "\"%s\"", temp_name);
         sprintf(second_table[i].movie, "\"%s\"", temp_movie);
-        bin_search(first_table, n, second_table[i]);
     }
+
+    qsort(second_table, m, sizeof(*second_table), comparator);
+
+    merge(first_table, second_table, n,m);
 
     free(first_table);
     free(second_table);

@@ -5,4 +5,5 @@ set(CMAKE_C_STANDARD 99)
 
 # Здесь мы говорим: "Сделай программу с именем Lab1 из файла lab1.c"
 add_executable(Task4 12_pack/4.c)
-add_executable(Task4 12_pack/5.c)
+add_executable(Task5 12_pack/5.c)
+add_executable(Task6 12_pack/6.c)
