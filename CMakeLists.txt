@@ -1,16 +1,32 @@
 cmake_minimum_required(VERSION 3.20)
 project(UniversityLabs C)
 
+# --- Настройки стандартов и компилятора ---
 set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
+# Включаем полезные предупреждения (Warnings) для отлова ошибок
+if(MSVC)
+    add_compile_options(/W4)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-add_executable(Task4 12_pack/4.c)
-add_executable(Task5 12_pack/5.c)
-add_executable(Task6 12_pack/6.c)
-add_executable(Task7 12_pack/7.c)
-add_executable(Task5_2 13_pack/5.c)
-add_executable(Task1_2 13_pack/1.c)
-add_executable(Task2_2 13_pack/2.c)
-target_link_libraries(Task2_2 m)
-add_executable(Task23_2 13_pack/3.c)
-add_executable(Task233_2 13_pack/4.c)
+# --- 12 Pack (Задачи 4-7) ---
+add_executable(Lab12_Task4  12_pack/4.c)
+add_executable(Lab12_Task5  12_pack/5.c)
+add_executable(Lab12_Task6  12_pack/6.c)
+add_executable(Lab12_Task7  12_pack/7.c)
+
+# --- 13 Pack (Задачи 1-7) ---
+add_executable(Lab13_Task1  13_pack/1.c)
+add_executable(Lab13_Task2  13_pack/2.c)
+add_executable(Lab13_Task3  13_pack/3.c)
+add_executable(Lab13_Task4  13_pack/4.c)
+add_executable(Lab13_Task5  13_pack/5.c)
+add_executable(Lab13_Task6  13_pack/6.c)
+add_executable(Lab13_Task7  13_pack/7.c)
+
+# --- Линковка библиотек ---
+# Подключаем математическую библиотеку (libm) для задачи, где она нужна
+target_link_libraries(Lab13_Task2 PRIVATE m)
