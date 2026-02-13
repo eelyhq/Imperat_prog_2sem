@@ -26,6 +26,8 @@ add_executable(Lab13_Task4  13_pack/4.c)
 add_executable(Lab13_Task5  13_pack/5.c)
 add_executable(Lab13_Task6  13_pack/6.c)
 add_executable(Lab13_Task7  13_pack/7.c)
+add_executable(Lab13_Task8  13_pack/8.c)
+
 
 # --- Линковка библиотек ---
 # Подключаем математическую библиотеку (libm) для задачи, где она нужна
