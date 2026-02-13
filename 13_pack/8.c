@@ -78,5 +78,5 @@ int main() {
     }
 
 
-    print(matrix, n, k);
+    print(matrix, n, k );
 }
