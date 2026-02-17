@@ -27,6 +27,10 @@ add_executable(Lab13_Task5  13_pack/5.c)
 add_executable(Lab13_Task6  13_pack/6.c)
 add_executable(Lab13_Task7  13_pack/7.c)
 add_executable(Lab13_Task8  13_pack/8.c)
+add_executable(Lab13_Task9  13_pack/9.c)
+add_executable(Lab13_Task10  13_pack/10.c)
+target_link_libraries(Lab13_Task10 m)
+
 
 
 # --- Линковка библиотек ---
