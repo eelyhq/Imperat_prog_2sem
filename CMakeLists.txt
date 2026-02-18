@@ -30,6 +30,7 @@ add_executable(Lab13_Task8  13_pack/8.c)
 add_executable(Lab13_Task9  13_pack/9.c)
 add_executable(Lab13_Task10  13_pack/10.c)
 target_link_libraries(Lab13_Task10 m)
+add_executable(Lab13_Task11  13_pack/11.c)
 
 
 

@@ -2,31 +2,25 @@
 #include <stdlib.h>
 #include <math.h>
 
-double f(double x, double w, double a, double b)
-{
-    double res = w * cos(a*x+b);
-
-    return res;
-}
 
 int main()
 {
     int m,n;
     scanf("%d %d", &n, &m);
 
-    double** X = malloc(sizeof(double*) * 1000);
-    double** Y = malloc(sizeof(double*) * 1000);
+    double** X = malloc(sizeof(double*) * 100);
+    double** Y = malloc(sizeof(double*) * 100);
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 100; i++)
     {
-        X[i] = malloc(sizeof(double) * 9);
-        Y[i] = malloc(sizeof(double) * 9);
+        X[i] = malloc(sizeof(double) * 12);
+        Y[i] = malloc(sizeof(double) * 12);
     }
 
-    double K = 1000.0;
-    double T = 9.0;
+    double K = 100.0;
+    double T = 12.0;
 
-    for (int i = 0; i < 1000; i++)//filling array with arguments
+    for (int i = 0; i < 100; i++)//filling array with arguments
     {
         double start = i / K;//this is begining of subsegment
         double finish = (i + 1) / K;//end
@@ -35,40 +29,36 @@ int main()
 
         double step = len / (T - 1);
 
-        for (int j = 0; j < 9; j++)
+        for (int j = 0; j < 12; j++)
         {
             X[i][j] = start + j * step;
         }
     }
 
-    double** koeffs = malloc(sizeof(double*) * n);
+    double W[10000], A[10000], B[10000];
     for (int i = 0; i < n; i++)
     {
-        koeffs[i] = malloc(sizeof(double) * 3);
-        double w, a, b;
-        scanf("%lf %lf %lf", &w, &a, &b);
-        koeffs[i][0] = w;
-        koeffs[i][1] = a;
-        koeffs[i][2] = b;
+        scanf("%lf %lf %lf", &W[i], &A[i], &B[i]);
+
     }
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 100; i++)
     {
-        for (int j = 0; j < 9; j++)
+        for (int j = 0; j < 12; j++)
         {
             double res = 0;
             for (int k = 0; k < n;k++)
             {
-                res += f(X[i][j],koeffs[k][0],koeffs[k][1],koeffs[k][2]);
+                res += W[k] * cos(A[k] * X[i][j] + B[k]);
             }
             Y[i][j] = res;
         }
     }
 
 
-    for (int i = 0; i < 1000; i++) {
-        for (int k = 1; k < 9; k++) {
-            for (int j = 8; j >= k; j--) {
+    for (int i = 0; i < 100; i++) {
+        for (int k = 1; k < 12; k++) {
+            for (int j = 11; j >= k; j--) {
 
                 double chisl = Y[i][j] - Y[i][j-1];
                 double znam = X[i][j] - X[i][j-k];
@@ -79,4 +69,33 @@ int main()
     }
 
 
+    for (int i = 0; i < m; i++)
+    {
+        double x;
+        scanf("%lf", &x);
+
+        int num_segment = (int)(x * 100);
+
+        if (num_segment == 100)
+        {
+            num_segment = 99;
+        }
+
+        double res = Y[num_segment][11];
+        for (int j = 10; j >= 0; j--)
+        {
+            res =  Y[num_segment][j] + (x - X[num_segment][j]) * res;
+        }
+        printf("%.15f\n", res);
+    }
+    for (int i = 0; i < 100; i++)
+    {
+        free(X[i]);
+        free(Y[i]);
+    }
+    free(X);
+    free(Y);
+    
+
+    return 0;
 }
