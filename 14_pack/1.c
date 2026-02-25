@@ -29,10 +29,15 @@ long long inv(long long a, long long m)
     return (x % m + m) % m;
 }
 
-int main()//ньютон
+int main() //Лагранж
 {
+    FILE* f_in = fopen("input.txt", "r");
+    FILE* f_out = fopen("output.txt", "w");
+
+
     int k;
-    scanf("%d", &k);
+    fscanf(f_in,"%d", &k);
+
 
     long long M[100];
     long long A[100];
@@ -42,45 +47,38 @@ int main()//ньютон
 
     for (int i = 0; i < k; i++)
     {
-        scanf("%lld", &M[i]);
+        fscanf(f_in,"%lld", &M[i]);
+        P *= M[i];
     }
 
     for (int i = 0; i < k; i++)
     {
-        scanf("%lld", &A[i]);
+        fscanf(f_in,"%lld", &A[i]);
     }
-
 
     long long x = 0;
 
-
     for (int i = 0; i < k; i++)
     {
+        long long m = P / M[i];
+        long long inV = inv(m % M[i], M[i]);
 
-        long long diff = A[i] - x % M[i];
-
-
-        diff = (diff % M[i] + M[i]) % M[i];
-
-        long long inV = inv(P % M[i], M[i]);
-
-        long long c = (diff * inV) % M[i];
-
-        x = x + c * P;
-
-        P = P * M[i];
+        long long t = A[i] * inV % M[i];
+        t = t * m ;
+        x = (x + t) % P;
     }
 
-    printf("%lld", x);
-
+    fprintf(f_out,"%lld", x) ;
+    fclose(f_in);
+    fclose(f_out);
     return 0;
 }
 
-// int main() //Лагранж
+
+// int main()//ньютон
 // {
 //     int k;
 //     scanf("%d", &k);
-//
 //
 //     long long M[100];
 //     long long A[100];
@@ -91,7 +89,6 @@ int main()//ньютон
 //     for (int i = 0; i < k; i++)
 //     {
 //         scanf("%lld", &M[i]);
-//         P *= M[i];
 //     }
 //
 //     for (int i = 0; i < k; i++)
@@ -99,20 +96,31 @@ int main()//ньютон
 //         scanf("%lld", &A[i]);
 //     }
 //
+//
 //     long long x = 0;
+//
 //
 //     for (int i = 0; i < k; i++)
 //     {
-//         long long m = P / M[i];
-//         long long inV = inv(m % M[i], M[i]);
 //
-//         long long t = A[i] * inV % M[i];
-//         t = t * m ;
-//         x = (x + t) % P;
+//         long long diff = A[i] - x % M[i];
+//
+//
+//         diff = (diff % M[i] + M[i]) % M[i];
+//
+//         long long inV = inv(P % M[i], M[i]);
+//
+//         long long c = (diff * inV) % M[i];
+//
+//         x = x + c * P;
+//
+//         P = P * M[i];
 //     }
 //
-//     printf("%lld", x) ;
+//     printf("%lld", x);
 //
 //     return 0;
 // }
+
+
 //
