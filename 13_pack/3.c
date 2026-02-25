@@ -1,8 +1,8 @@
 #include <stdio.h>
 
 int  main() {
-    FILE* f_in = fopen("input.txt","r");
-    FILE* f_out = fopen("output.txt","w");
+    FILE* f_in = fopen("/home/eely/CLionProjects/Imperat_prog_2sem/13_pack/input.txt","r");
+    FILE* f_out = fopen("/home/eely/CLionProjects/Imperat_prog_2sem/13_pack/output.txt","w");
 
     int c = ' ';
     char s1 = '[';

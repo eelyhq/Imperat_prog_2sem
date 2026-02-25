@@ -12,13 +12,13 @@ else()
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
-# --- 12 Pack (Задачи 4-7) ---
+# --- 12 Pack  ---
 add_executable(Lab12_Task4  12_pack/4.c)
 add_executable(Lab12_Task5  12_pack/5.c)
 add_executable(Lab12_Task6  12_pack/6.c)
 add_executable(Lab12_Task7  12_pack/7.c)
 
-# --- 13 Pack (Задачи 1-7) ---
+# --- 13 Pack ---
 add_executable(Lab13_Task1  13_pack/1.c)
 add_executable(Lab13_Task2  13_pack/2.c)
 add_executable(Lab13_Task3  13_pack/3.c)
@@ -31,6 +31,14 @@ add_executable(Lab13_Task9  13_pack/9.c)
 add_executable(Lab13_Task10  13_pack/10.c)
 target_link_libraries(Lab13_Task10 m)
 add_executable(Lab13_Task11  13_pack/11.c)
+
+
+# --- 14 Pack ---
+add_executable(Lab14_Task1  14_pack/1.c)
+add_executable(Lab14_Task3  14_pack/3.c)
+
+
+
 
 
 
