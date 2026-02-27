@@ -36,6 +36,8 @@ add_executable(Lab13_Task11  13_pack/11.c)
 # --- 14 Pack ---
 add_executable(Lab14_Task1  14_pack/1.c)
 add_executable(Lab14_Task3  14_pack/3.c)
+add_executable(Lab14_Task5  14_pack/5/main.c)
+
 
 
 
