@@ -1,19 +1,36 @@
 #include <stdint.h>
+#include <stdint.h>
 #define MAX 100002
 
-long long sums = malloc(sizeof(long long) * MAX);
+extern long long sums[MAX];
+extern int N;
+int64_t Sum ( int l , int r );
 
-void Init(const int* arr , int n)
+
+int bin_search(long long* arr, int l, int n, long long s)
 {
-    sums[0] = 0;
+    int L = l;
+    int R = n;
+    int res = -1;
 
-    for (int i = 1; i < n; i++)
+    while (L <= R )
     {
-        sums[i] = sums[i-1] + arr[i];
+        int M = (L+R)/2;
+
+        if (Sum(M, l) <= s)
+        {
+            res = M;
+            L = M + 1;
+        }
+        else if (Sum(M, l)  > s )
+        {
+            R = M - 1;
+        }
     }
+    return res;
 }
 
-int64_t Sum(int l, int r)
+int Query(int l, int64_t sum)
 {
-    return sums[]
+    return bin_search(sums, l, N, sum);
 }

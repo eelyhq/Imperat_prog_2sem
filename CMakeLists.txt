@@ -33,11 +33,15 @@ target_link_libraries(Lab13_Task10 m)
 add_executable(Lab13_Task11  13_pack/11.c)
 
 
+
+
 # --- 14 Pack ---
 add_executable(Lab14_Task1  14_pack/1.c)
 add_executable(Lab14_Task3  14_pack/3.c)
 add_executable(Lab14_Task5  14_pack/5/main.c)
-
+add_executable(Lab13_Task4-1  14_pack/4/main.c)
+add_executable(Lab13_Task4-2 14_pack/4/sum.c)
+add_executable(Lab13_Task4-3  14_pack/4/query.c)
 
 
 
