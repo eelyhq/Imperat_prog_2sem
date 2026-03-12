@@ -44,8 +44,11 @@ add_executable(Lab13_Task4-2 14_pack/4/sum.c)
 add_executable(Lab13_Task4-3  14_pack/4/query.c)
 
 
-
-
+# --- 15 Pack ---
+add_executable(Lab15_Task1-1  15_pack/1/level1.c)
+add_executable(Lab15_Task1-2  15_pack/1/level2.c)
+add_executable(Lab15_Task1-3  15_pack/1/level3.c)
+add_executable(Lab15_Task3  15_pack/3.c)
 
 
 # --- Линковка библиотек ---

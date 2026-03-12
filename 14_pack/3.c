@@ -1,7 +1,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-
 #if defined(__GNUC__) && !defined(__llvm__)
 #define REAL_GCC   __GNUC__
 #endif
