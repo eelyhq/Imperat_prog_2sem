@@ -6,7 +6,6 @@ int main()
     FILE* f_out = fopen("output.txt", "w");
 
     int c;
-    int slashes = 0;
     int f1 = 0;
     int f4 = 0;
 
