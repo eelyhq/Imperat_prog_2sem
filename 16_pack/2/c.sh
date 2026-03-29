@@ -1,0 +1,1 @@
+gcc main.c matrixsqr.c -I./ -L./ -lpthread -lopenblas -o checked_solution

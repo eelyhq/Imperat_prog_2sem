@@ -53,6 +53,14 @@ add_executable(Lab15_Task1-2  15_pack/1/level2.c)
 add_executable(Lab15_Task1-3  15_pack/1/level3.c)
 add_executable(Lab15_Task3  15_pack/3.c)
 
+# --- 16 Pack ---
+add_executable(Lab16_Task2  16_pack/2/main.c)
+add_executable(Lab16_Task3  16_pack/3/main.c)
+add_executable(Lab16_Task4  16_pack/4/main.c)
+
+
+
+
 
 # --- Линковка библиотек ---
 # Подключаем математическую библиотеку (libm) для задачи, где она нужна
