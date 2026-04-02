@@ -56,16 +56,25 @@ add_executable(Lab15_Task4  15_pack/4.c)
 target_link_libraries(Lab15_Task4 m)
 
 # --- 16 Pack ---
+add_executable(Lab16_Task1  16_pack/1/test.c 16_pack/1/integerset.c)
 add_executable(Lab16_Task2  16_pack/2/main.c)
 add_executable(Lab16_Task3  16_pack/3/main.c)
 add_executable(Lab16_Task4  16_pack/4/main.c)
 
+# Создаем цель Lab16_Task5 из myasm.c
+add_executable(Lab16_Task5  16_pack/5/myasm.c)
+# Линкуем dl именно к Lab16_Task5 !
+target_link_libraries(Lab16_Task5 dl)
 
+# --- 2. ПЛАГИН CORE ---
+add_library(core SHARED "16_pack/5/core.c")
+set_target_properties(core PROPERTIES PREFIX "")
 
+# --- 3. ПЛАГИН STRING ---
+add_library(string SHARED "16_pack/5/string.c")
+set_target_properties(string PROPERTIES PREFIX "")
 
-# --- 16 Pack ---
-add_executable(Lab16_Task1  16_pack/1/test.c 16_pack/1/integerset.c)
-
+add_dependencies(Lab16_Task5 core string)
 # --- Линковка библиотек ---
 # Подключаем математическую библиотеку (libm) для задачи, где она нужна
 target_link_libraries(Lab13_Task2 PRIVATE m)
