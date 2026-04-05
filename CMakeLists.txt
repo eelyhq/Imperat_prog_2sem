@@ -75,6 +75,9 @@ add_library(string SHARED "16_pack/5/string.c")
 set_target_properties(string PROPERTIES PREFIX "")
 
 add_dependencies(Lab16_Task5 core string)
+
+add_executable(Lab16_Task6  16_pack/6/main.c)
+
 # --- Линковка библиотек ---
 # Подключаем математическую библиотеку (libm) для задачи, где она нужна
 target_link_libraries(Lab13_Task2 PRIVATE m)

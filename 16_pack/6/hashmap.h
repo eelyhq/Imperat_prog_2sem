@@ -1,3 +1,4 @@
+#include <inttypes.h>
 #pragma once
 
 //pointer to key or value (untyped)
@@ -5,17 +6,26 @@ typedef const void* cpvoid;
 
 //returns 1 if and only if two keys pointed by [a] and [b] are equal
 //returns 0 otherwise
-typedef int (* EqualFunc)(cpvoid a, cpvoid b);
+typedef int (*EqualFunc)(cpvoid a, cpvoid b);
 
 //returns 32-bit hash of a key pointed by [key]
-typedef uint32_t (* HashFunc)(cpvoid key);
+typedef uint32_t (*HashFunc)(cpvoid key);
+
+typedef struct node
+{
+    cpvoid key;
+    cpvoid value;
+    struct node* next_node;
+} node;
 
 typedef struct HashMap {
-    void** map;
+    node** map;
     int num_elements;
-    EqualFunc* eq_func;
-    HashFunc* hash_func;
+    EqualFunc eq_func;
+    HashFunc hash_func;
+    int size;
 } HashMap;
+
 
 
 //creates and returns new hash table with:
