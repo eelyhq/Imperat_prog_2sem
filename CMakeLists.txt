@@ -78,6 +78,14 @@ add_dependencies(Lab16_Task5 core string)
 
 add_executable(Lab16_Task6  16_pack/6/main.c)
 
+
+# --- 16 Pack ---
+add_executable(Lab17_Task1 17_pack/1.c)
+add_executable(Lab17_Task2 17_pack/2.c)
+add_executable(Lab17_Task3 17_pack/3.c)
+add_executable(Lab17_Task4 17_pack/4.c)
+
+
 # --- Линковка библиотек ---
 # Подключаем математическую библиотеку (libm) для задачи, где она нужна
 target_link_libraries(Lab13_Task2 PRIVATE m)
