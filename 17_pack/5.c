@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 typedef struct vector{
     int* arr ;
     int n ;
@@ -37,16 +38,18 @@ int PUSH( vector* vec , int value ) {
 }
 
 
-int dfs(vector** adj_list, int v, int* visited, int* t_out, int* mark, int* num_out_ver)
+int dfs(vector** adj_list, int v, int* visited, int* gray_ver, int* mark, int* num_gray_ver)
 {
     mark[v] = 1;
+    gray_ver[(*num_gray_ver)++] = v;
+
     visited[v] = 1;
 
     for (int i = 0; i < adj_list[v] -> n; i++ )
     {
         if (mark[adj_list[v] -> arr[i]] == 0)
         {
-            int f = dfs(adj_list, adj_list[v] -> arr[i], visited, t_out, mark, num_out_ver);
+            int f = dfs(adj_list, adj_list[v] -> arr[i], visited, gray_ver, mark, num_gray_ver);
             if (f != -1)
             {
                 return v;
@@ -58,11 +61,11 @@ int dfs(vector** adj_list, int v, int* visited, int* t_out, int* mark, int* num_
         }
     }
     mark[v] = 2;
-    t_out[v] = (*num_out_ver)--;
+    (*num_gray_ver)--; // work like stack
     return -1;
 }
 
-void clear(vector** adj_list, int n, int* visited, int* t_out, int* mark)
+void clear(vector** adj_list, int n, int* visited, int* gray_vertices, int* mark)
 {
     for (int i = 1; i < n; i++)
     {
@@ -70,18 +73,16 @@ void clear(vector** adj_list, int n, int* visited, int* t_out, int* mark)
     }
     free(adj_list);
     free(visited);
-    free(t_out);
+    free(gray_vertices);
     free(mark);
     return;
 }
-// main idea - make oriented graph with edges (X1,X2),
-// where X1<X2 on condition. then make check O(n) on cycles
-// by dfs and O(N) for give values to vertices by val of exit from dfs
 
-int main()
-{
-    FILE* f_in = fopen("/home/eely/CLionProjects/Imperat_prog_2sem/17_pack/input.txt", "r");
-    FILE* f_out  = fopen("/home/eely/CLionProjects/Imperat_prog_2sem/17_pack/output.txt", "w");
+
+int main() {
+    FILE* f_in = fopen("input.txt", "r");
+    FILE* f_out  = fopen("output.txt", "w");
+
 
     int n, m; // n - vertices, m - edges
 
@@ -105,33 +106,32 @@ int main()
         PUSH(adjacency_list[from], to);
     }
 
+
     int* visited = (int*)calloc((n+1), sizeof(int));
-    int* t_out = (int*)calloc((n+1), sizeof(int)); // time of out from vertice in dfs
+    int* gray_vertices = (int*)calloc((n+1), sizeof(int)); // time of out from vertice in dfs
     int* mark = (int*)calloc((n+1), sizeof(int)); // 0 - white, 1 - gray, 2 - black
 
-    int num_out_ver = n;
+    int num_gray_ver = 0;
 
     for (int i = 1; i <= n; i++)
     {
         if (visited[i] == 0)
         {
-            int f = dfs(adjacency_list, i,visited, t_out, mark, &num_out_ver);
-            if (f != -1)
-            {
-                fprintf(f_out, "NO");
-                clear(adjacency_list, n, visited, t_out, mark);
+            int f = dfs(adjacency_list, i,visited, gray_vertices, mark, &num_gray_ver);
+            if (f != -1) {
+                fprintf(f_out, "%d\n", num_gray_ver);
+                for (int j = 0; j < num_gray_ver; j++) {
+                    fprintf(f_out, "%d ", gray_vertices[j]);
+                }
+                clear(adjacency_list, n, visited, gray_vertices, mark);
                 return 0;
             }
         }
     }
 
-    fprintf(f_out, "YES\n");
+    fprintf(f_out,"-1");
 
-    for (int i = 1; i <= n; i++)
-    {
-        fprintf(f_out, "%d ", t_out[i]);
-    }
-    clear(adjacency_list, n, visited, t_out, mark);
+    clear(adjacency_list, n, visited, gray_vertices, mark);
+
     return 0;
-
 }
