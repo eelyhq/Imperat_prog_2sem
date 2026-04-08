@@ -80,8 +80,8 @@ void clear(vector** adj_list, int n, int* visited, int* t_out, int* mark)
 
 int main()
 {
-    FILE* f_in = fopen("/home/eely/CLionProjects/Imperat_prog_2sem/17_pack/input.txt", "r");
-    FILE* f_out  = fopen("/home/eely/CLionProjects/Imperat_prog_2sem/17_pack/output.txt", "w");
+    FILE* f_in = fopen("input.txt", "r");
+    FILE* f_out  = fopen("/output.txt", "w");
 
     int n, m; // n - vertices, m - edges
 

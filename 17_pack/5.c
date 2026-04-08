@@ -52,12 +52,12 @@ int dfs(vector** adj_list, int v, int* visited, int* gray_ver, int* mark, int* n
             int f = dfs(adj_list, adj_list[v] -> arr[i], visited, gray_ver, mark, num_gray_ver);
             if (f != -1)
             {
-                return v;
+                return f;
             }
         }
         else if (mark[adj_list[v] -> arr[i]] == 1)
         {
-            return v; // we come to gray vertice -> there is a cycle
+            return adj_list[v] -> arr[i]; // we come to gray vertice -> there is a cycle
         }
     }
     mark[v] = 2;
@@ -113,18 +113,31 @@ int main() {
 
     int num_gray_ver = 0;
 
+    int flag = 0;
     for (int i = 1; i <= n; i++)
     {
         if (visited[i] == 0)
         {
             int f = dfs(adjacency_list, i,visited, gray_vertices, mark, &num_gray_ver);
             if (f != -1) {
-                fprintf(f_out, "%d\n", num_gray_ver);
                 for (int j = 0; j < num_gray_ver; j++) {
-                    fprintf(f_out, "%d ", gray_vertices[j]);
+                    if (gray_vertices[j] == f)
+                    {
+                        flag = 1;
+                    }
+                    if (flag)
+                    {
+                        int k = j;
+                        fprintf(f_out,"%d\n", num_gray_ver - j);
+                        for (int q = j; q < num_gray_ver; q++)
+                        {
+                            fprintf(f_out, "%d ", gray_vertices[q]);
+                        }
+                        clear(adjacency_list, n, visited, gray_vertices, mark);
+                        return 0;
+                    }
                 }
-                clear(adjacency_list, n, visited, gray_vertices, mark);
-                return 0;
+
             }
         }
     }
