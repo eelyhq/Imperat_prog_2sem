@@ -85,8 +85,7 @@ add_executable(Lab17_Task2 17_pack/2.c)
 add_executable(Lab17_Task3 17_pack/3.c)
 add_executable(Lab17_Task4 17_pack/4.c)
 add_executable(Lab17_Task5 17_pack/5.c)
-add_executable(Lab17_Task8 17_pack/8.c)
-
+add_executable(Lab17_Task6 17_pack/6.c)
 
 
 # --- Линковка библиотек ---

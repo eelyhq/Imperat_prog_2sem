@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 typedef struct vector{
     int* arr ;
     int n ;
@@ -35,7 +36,6 @@ int PUSH( vector* vec , int value ) {
     vec->arr[vec->n++] = value;
     return vec->n - 1;
 }
-
 
 int dfs(vector** adj_list, int v, int* visited, int* t_out, int* mark, int* num_out_ver)
 {
