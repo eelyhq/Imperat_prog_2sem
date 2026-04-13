@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define INF 2000000000
-#define MAX_EDGES 600001
+#define INF 1000000000000000000LL
+#define MAX_EDGES 1000001
 
 typedef struct edge {
     int to;
-    int weight;
+    long long weight;
+    int id;
 }edge;
 
 typedef struct vector{
@@ -123,7 +124,7 @@ int main() {
 
 
     vector** adj_list = (vector**)malloc((n+1) * sizeof(vector*));
-    int* p = (int*)malloc((n+1) * sizeof(int));
+    edge* p = (edge*)malloc((n+1) * sizeof(edge));
     int num_p = 0;
 
     for (int i = 1; i <= n; i++)
@@ -132,18 +133,18 @@ int main() {
         INIT(adj_list[i]);
     }
 
+    int id = 1;
     for (int i = 0; i < m; i++)
     {
         int from, to, weight;
         fscanf(f_in, "%d %d %d", &from, &to, &weight);
 
-        edge e = {to, weight};
+        edge e = {to, weight, id};
+        id++;
         PUSH(adj_list[from], e);
-        // edge e2 = {from, weight};
-        // PUSH(adj_list[to], e2);
     }
 
-    int* dist = (int*)malloc((n+1) *  sizeof(int));
+    long long* dist = (long long*)malloc((n+1) *  sizeof(long long));
 
 
     edge* heap = (edge*)malloc(MAX_EDGES * sizeof(edge));
@@ -154,7 +155,7 @@ int main() {
         for (int q = 1; q <= n; q++)
         {
             dist[q] = INF;
-            p[q] = -1;
+            p[q].to = -1;
         }
         int num_el = 0;
         int u = requests[i][0];
@@ -171,15 +172,19 @@ int main() {
                 continue;
 
             if (e.to == v)
+            {
+                p[0] = e;
                 break;
+
+            }
 
             for (int j = 0; j < adj_list[e.to] -> n; j++) {
                 edge neighbour = adj_list[e.to] -> arr[j];
 
                 if (e.weight + neighbour.weight < dist[neighbour.to]) {
                     dist[neighbour.to] = e.weight + neighbour.weight;
-                    p[neighbour.to] = e.to;
-                    add(heap, (edge){neighbour.to, dist[neighbour.to]}, &num_el);
+                    p[neighbour.to ] = e;
+                    add(heap, (edge){neighbour.to, dist[neighbour.to], neighbour.id}, &num_el);
                 }
             }
         }
@@ -187,16 +192,17 @@ int main() {
         if (dist[v] != INF)
         {
             int path_len = 0;
-            int curr = v;
+            edge curr;
+            curr = p[0];
 
-            while (curr != -1)
+            while (curr.to != -1)
             {
-                path[path_len++] = curr;
-                curr = p[curr];
+                path[path_len++] = curr.id;
+                curr = p[curr.to];
             }
-            fprintf(f_out, "YES %d %d ", dist[v], path_len);
+            fprintf(f_out, "quarantine %lld %d ", dist[v], path_len-1);
 
-            for (int j = path_len - 1; j >= 0; j--)
+            for (int j = path_len - 2; j >= 0; j--)
             {
                 fprintf(f_out, "%d ", path[j]);
             }
@@ -204,7 +210,7 @@ int main() {
         }
         else
         {
-            fprintf(f_out,"NO\n");
+            fprintf(f_out,"DOOMED\n");
         }
         num_p = 0;
     }

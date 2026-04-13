@@ -89,6 +89,10 @@ add_executable(Lab17_Task6 17_pack/6.c)
 add_executable(Lab17_Task7 17_pack/7.c)
 add_executable(Lab17_Task8 17_pack/8.c)
 add_executable(Lab17_Task9 17_pack/9.c)
+add_executable(Lab17_Task10 17_pack/10.c)
+add_executable(Lab17_Task11 17_pack/11.c)
+add_executable(Lab17_Task13 17_pack/13.c)
+
 
 
 
