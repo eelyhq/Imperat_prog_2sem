@@ -79,7 +79,7 @@ add_dependencies(Lab16_Task5 core string)
 add_executable(Lab16_Task6  16_pack/6/main.c)
 
 
-# --- 16 Pack ---
+# --- 17 Pack ---
 add_executable(Lab17_Task1 17_pack/1.c)
 add_executable(Lab17_Task2 17_pack/2.c)
 add_executable(Lab17_Task3 17_pack/3.c)
@@ -93,7 +93,15 @@ add_executable(Lab17_Task10 17_pack/10.c)
 add_executable(Lab17_Task11 17_pack/11.c)
 add_executable(Lab17_Task13 17_pack/13.c)
 
-
+# --- 18 Pack ---
+add_executable(Lab18_Task1 18_pack-last/1.c)
+add_executable(Lab18_Task2 18_pack-last/2.c)
+add_executable(Lab18_Task3 18_pack-last/3.c)
+add_executable(Lab18_Task4 18_pack-last/4.c)
+add_executable(Lab18_Task5 18_pack-last/5.c)
+add_executable(Lab18_Task6 18_pack-last/6.c)
+add_executable(Lab18_Task7 18_pack-last/7.c)
+add_executable(Lab18_Task8 18_pack-last/8.c)
 
 
 
